@@ -154,19 +154,21 @@ function process_query_strings (param_dispatch_fn) {
 if (DEBUG && window.console!==undefined && window.console.log!==undefined) {
     var Log = function () {
 	if (/Firefox/.test(navigator.userAgent)) {
-	    window.console.log.apply(this,arguments);
+	    window.console.log.apply(console,arguments);
 	} else {
 	    if (arguments.length==1) {
 		window.console.log(arguments[0]);
 	    } else {
 		var message = '';
 		for (var i=0; i!=arguments.length; ++i) {
-		    if (arguments[i]===undefined || (arguments[i]!=0 && 
-						     arguments[i]!='' &&
-						     arguments[i]!=false) && !arguments[i])
+		    if (arguments[i]===undefined || 
+			(arguments[i]!=0 && 
+			 arguments[i]!='' &&
+			 arguments[i]!=false) && !arguments[i]) {
 			message += ' NULL';
-		    else
+		    } else {
 			message += ' '+arguments[i].toString();
+		    }
 		}
 		window.console.log(message);
 	    }
